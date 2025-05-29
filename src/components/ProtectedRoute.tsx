@@ -4,20 +4,20 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user?.id) {
+    if (!loading && !user?.id) {
       toast.error("You must be logged in to access this page.");
       navigate("/");
     }
-  }, [user, navigate]);
+  }, [user, navigate, loading]);
 
   // Prevent rendering protected content while redirecting
-  if (!user?.id) return null;
+  if (!loading && !user?.id) return null;
 
-  return <>{children}</>;
+  if (!loading && user?.id) return children;
 };
 
 export default ProtectedRoute;

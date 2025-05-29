@@ -62,7 +62,9 @@ const LikesComponent = ({ postId }: Props) => {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["likes", postId, user?.id]);
+      if (user?.id) {
+        queryClient.invalidateQueries({ queryKey: ["likes", postId, user.id] });
+      }
     },
     onError: () => {
       toast.error("Something went wrong");

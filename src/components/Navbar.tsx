@@ -111,6 +111,7 @@ const Navbar = () => {
               <hr className="text-gray-600" />
               <Link
                 to="/your-posts"
+                onClick={() => setMenuOpen(false)}
                 className="text-gray-300 hover:text-white transition-colors"
               >
                 Your Posts

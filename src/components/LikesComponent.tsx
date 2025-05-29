@@ -62,6 +62,7 @@ const LikesComponent = ({ postId }: Props) => {
       }
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["likes", postId, user?.id] });
       queryClient.invalidateQueries({ queryKey: ["likesCount", postId] });
     },
     onError: () => {
